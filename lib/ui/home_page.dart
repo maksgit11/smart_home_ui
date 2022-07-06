@@ -75,7 +75,7 @@ class DevicesMyRoom extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              color: Colors.grey[800],
+              color: Colors.grey[700],
             ),
             padding: const EdgeInsets.all(10.0),
             child: Stack(
