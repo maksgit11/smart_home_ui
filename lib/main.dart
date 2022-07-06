@@ -5,9 +5,9 @@ import 'package:smart_home_ui/ui/home_page.dart';
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
+      statusBarColor: Color.fromARGB(255, 0, 0, 0),
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.black,
+      systemNavigationBarColor: Color.fromARGB(255, 0, 0, 0),
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
@@ -20,13 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Smart home',
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blue,
-        // colorScheme: ColorScheme.fromSwatch().copyWith(
-        //   primary: Colors.black,
-        // ),
+        brightness: Brightness.dark,
       ),
       home: const HomePage(),
     );
