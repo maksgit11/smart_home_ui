@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home_ui/data/device.dart';
-import 'package:smart_home_ui/ui/widgets/rooms_listview.dart';
+import 'package:smart_home_ui/ui/home_page/widgets/living_room_devices.dart';
+import 'package:smart_home_ui/ui/home_page/widgets/my_room_devices.dart';
+import 'package:smart_home_ui/ui/home_page/widgets/rooms_listview.dart';
+import 'package:smart_home_ui/ui/widgets/app_nav_bar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-  final int _roomIndex = 0;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _roomIndex = 0;
+  bool _switch1 = false;
+
+  void _roomToggle(int index) {
+    setState(() {
+      _roomIndex = index;
+    });
+  }
+
+  void _deviceToggle(e) {
+    setState(() {
+      _switch1 = e;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +40,7 @@ class HomePage extends StatelessWidget {
             IconButton(icon: const Icon(Icons.info_outline), onPressed: () {}),
           ],
         ),
+        bottomNavigationBar: const AppNavBar(current: 0),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
           child: Column(
@@ -28,7 +50,10 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               const Text('Rooms', style: TextStyle(fontSize: 22)),
               const SizedBox(height: 10),
-              RoomsListView(roomIndex: _roomIndex),
+              RoomsListView(
+                selectedIndex: _roomIndex,
+                roomToggle: _roomToggle,
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,61 +75,21 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 5),
-              if(_roomIndex == 0) const DevicesMyRoom(),
-              if(_roomIndex == 1) const DevicesMyRoom(),
-              if(_roomIndex == 2) const DevicesMyRoom(),
-              if(_roomIndex == 3) const DevicesMyRoom(),
+              if (_roomIndex == 0)
+                MyRoomDevices(
+                  switch1: _switch1,
+                  deviceToggle: _deviceToggle,
+                ),
+              if (_roomIndex == 1)
+                LivingRoomDevices(
+                  switch1: _switch1,
+                  deviceToggle: _deviceToggle,
+                ),
+              // if (_roomIndex == 2) const MyRoomDevices(),
+              // if (_roomIndex == 3) const MyRoomDevices(),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DevicesMyRoom extends StatelessWidget {
-  const DevicesMyRoom({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: devices.map((device) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: Colors.grey[700],
-            ),
-            padding: const EdgeInsets.all(10.0),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: Icon(device.icon),
-                    ),
-                    Text(device.title),
-                    Text(device.subTitle),
-                  ],
-                ),
-                Positioned(
-                  top: 1,
-                  right: 1,
-                  child: Switch(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
       ),
     );
   }

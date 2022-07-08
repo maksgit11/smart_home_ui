@@ -13,8 +13,14 @@ class Device {
 }
 
 const List<Device> devices = [
-  Device(title: 'Lighting', subTitle: 'subText', icon: Icons.light),
+  Device(title: 'Lighting', subTitle: 'subText', icon: Icons.lightbulb_outline),
   Device(title: 'Android TV', subTitle: 'subText', icon: Icons.android),
-  Device(title: 'Security', subTitle: 'subText', icon: Icons.security),
+  Device(title: 'Security', subTitle: 'subText', icon: Icons.lock_outline),
+  Device(title: 'Internet', subTitle: 'subText', icon: Icons.wifi),
+];
+
+const List<Device> devicesLR = [
+  Device(title: 'Lighting', subTitle: 'subText', icon: Icons.lightbulb_outline),
+  Device(title: 'Security', subTitle: 'subText', icon: Icons.lock_outline),
   Device(title: 'Internet', subTitle: 'subText', icon: Icons.wifi),
 ];
