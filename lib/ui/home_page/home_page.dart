@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _roomIndex = 0;
-  bool _switch1 = false;
+  List<bool> _switch1 = [false, false, false, false];
 
   void _roomToggle(int index) {
     setState(() {
@@ -80,11 +80,11 @@ class _HomePageState extends State<HomePage> {
                   switch1: _switch1,
                   deviceToggle: _deviceToggle,
                 ),
-              if (_roomIndex == 1)
-                LivingRoomDevices(
-                  switch1: _switch1,
-                  deviceToggle: _deviceToggle,
-                ),
+              // if (_roomIndex == 1)
+              //   LivingRoomDevices(
+              //     switch1: _switch1,
+              //     deviceToggle: _deviceToggle,
+              //   ),
               // if (_roomIndex == 2) const MyRoomDevices(),
               // if (_roomIndex == 3) const MyRoomDevices(),
             ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_home_ui/data/device.dart';
 
 class MyRoomDevices extends StatelessWidget {
-  final bool switch1;
+  final List<bool> switch1;
   final Function deviceToggle;
   const MyRoomDevices({
     Key? key,
@@ -17,7 +17,7 @@ class MyRoomDevices extends StatelessWidget {
         mainAxisSpacing: 25,
         crossAxisSpacing: 25,
         crossAxisCount: 2,
-        children: devices.map((device) {
+        children: List.generate(devices.length, (index) {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25.0),
@@ -36,7 +36,7 @@ class MyRoomDevices extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                       ),
                       child: Icon(
-                        device.icon,
+                        devices[index].icon,
                         size: 30,
                       ),
                     ),
@@ -45,7 +45,7 @@ class MyRoomDevices extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            device.title,
+                            devices[index].title,
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),
@@ -55,7 +55,7 @@ class MyRoomDevices extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            device.subTitle,
+                            devices[index].subTitle,
                             style: const TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -67,7 +67,7 @@ class MyRoomDevices extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: Switch(
-                    value: switch1,
+                    value: switch1[index],
                     onChanged: (bool e) => deviceToggle(e),
                     activeColor: Colors.white,
                     activeTrackColor: Colors.grey,
@@ -78,7 +78,7 @@ class MyRoomDevices extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
+        }),
       ),
     );
   }
