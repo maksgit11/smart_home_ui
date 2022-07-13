@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_home_ui/data/device.dart';
 
 class LivingRoomDevices extends StatelessWidget {
-  final bool switch1;
+  final List<bool> switch1;
   final Function deviceToggle;
   const LivingRoomDevices({
     Key? key,
@@ -17,7 +17,7 @@ class LivingRoomDevices extends StatelessWidget {
         mainAxisSpacing: 25,
         crossAxisSpacing: 25,
         crossAxisCount: 2,
-        children: devicesLR.map((device) {
+        children: List.generate(devicesLR.length, (index) {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25.0),
@@ -33,10 +33,13 @@ class LivingRoomDevices extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
+                        color: switch1[index]
+                            ? Colors.grey[500]
+                            : Colors.grey[800],
                         border: Border.all(color: Colors.grey),
                       ),
                       child: Icon(
-                        device.icon,
+                        devicesLR[index].icon,
                         size: 30,
                       ),
                     ),
@@ -45,7 +48,7 @@ class LivingRoomDevices extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            device.title,
+                            devicesLR[index].title,
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),
@@ -55,7 +58,7 @@ class LivingRoomDevices extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            device.subTitle,
+                            devicesLR[index].subTitle,
                             style: const TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -67,8 +70,8 @@ class LivingRoomDevices extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: Switch(
-                    value: switch1,
-                    onChanged: (bool e) => deviceToggle(e),
+                    value: switch1[index],
+                    onChanged: (bool e) => deviceToggle(e, index),
                     activeColor: Colors.white,
                     activeTrackColor: Colors.grey,
                     inactiveThumbColor: Colors.grey[700],
@@ -78,7 +81,7 @@ class LivingRoomDevices extends StatelessWidget {
               ],
             ),
           );
-        }).toList(),
+        }),
       ),
     );
   }

@@ -33,6 +33,9 @@ class MyRoomDevices extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
+                        color: switch1[index]
+                            ? Colors.grey[500]
+                            : Colors.grey[800],
                         border: Border.all(color: Colors.grey),
                       ),
                       child: Icon(
@@ -68,7 +71,7 @@ class MyRoomDevices extends StatelessWidget {
                   right: 0,
                   child: Switch(
                     value: switch1[index],
-                    onChanged: (bool e) => deviceToggle(e),
+                    onChanged: (bool e) => deviceToggle(e, index),
                     activeColor: Colors.white,
                     activeTrackColor: Colors.grey,
                     inactiveThumbColor: Colors.grey[700],

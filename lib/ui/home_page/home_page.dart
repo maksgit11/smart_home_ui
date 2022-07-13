@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _roomIndex = 0;
-  List<bool> _switch1 = [false, false, false, false];
+  final List<bool> _switch1 = [false, false, false, false];
 
   void _roomToggle(int index) {
     setState(() {
@@ -21,9 +21,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _deviceToggle(e) {
+  void _deviceToggle(e, index) {
     setState(() {
-      _switch1 = e;
+      _switch1[index] = e;
     });
   }
 
@@ -42,10 +42,11 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: const AppNavBar(current: 0),
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
               const Text('Welcome home.', style: TextStyle(fontSize: 28)),
               const SizedBox(height: 20),
               const Text('Rooms', style: TextStyle(fontSize: 22)),
@@ -80,11 +81,11 @@ class _HomePageState extends State<HomePage> {
                   switch1: _switch1,
                   deviceToggle: _deviceToggle,
                 ),
-              // if (_roomIndex == 1)
-              //   LivingRoomDevices(
-              //     switch1: _switch1,
-              //     deviceToggle: _deviceToggle,
-              //   ),
+              if (_roomIndex == 1)
+                LivingRoomDevices(
+                  switch1: _switch1,
+                  deviceToggle: _deviceToggle,
+                ),
               // if (_roomIndex == 2) const MyRoomDevices(),
               // if (_roomIndex == 3) const MyRoomDevices(),
             ],

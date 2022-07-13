@@ -34,7 +34,7 @@ class AppNavBar extends StatelessWidget {
         ],
       ),
       child: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        type: BottomNavigationBarType.fixed,
         currentIndex: current,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey[700],
